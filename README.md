@@ -4,6 +4,8 @@
 
 Caro recrutador, obrigado pela oportunidade de estar nesse processo seletivo. Esse readme foi criado com o intuíto de instruir sobre como manipular o projeto criado, facilitando assim sua instalação.
 
+Link do backend: https://github.com/HerbertCarvalhoxxi/360-backend
+
 ## 1 Instalação
 
 Após clonar o repositório, o comando de instalação é `npm install`

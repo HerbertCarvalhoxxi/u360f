@@ -1,0 +1,120 @@
+.form-body {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Kanit", sans-serif;
+    gap: 20px;
+    color: #ffffff;
+
+}
+
+.form-body button img {
+    width:30px;
+}
+
+.personal-infos {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 30px;
+    background-color: #47c7f6;
+    padding: 2% 10%;
+    border-radius: 30px;
+}
+
+.personal-infos img {
+  width: 150px;
+  height: 150px;
+  background-color: #333; /* Cor de fundo do círculo */
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  
+}
+
+.name-and-age {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 30px;
+}
+
+.name-and-age p {
+    font-weight: 500;
+    font-size: 1.9rem;
+    
+}
+
+.local-and-bio {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+.local-infos {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+    background-color: #47c7f6;
+    padding: 2% 5%;
+    border-radius: 30px;
+}
+
+.local-infos p {
+    display: flex;
+    font-weight: 500;
+    font-size: 1.6rem;
+    flex-wrap: wrap;
+}
+
+.bio {
+    height: 260px;
+    max-width: 500px;
+    background-color: #47c7f6;
+    border-radius: 30px;
+    overflow: auto;
+}
+
+.bio p {
+    margin: 6px 0 0 6px;
+}
+
+button {
+    position: relative;
+    display: inline-block;
+    margin: 15px;
+    padding: 15px 30px;
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: #47c7f6;
+    background: transparent;
+    cursor: pointer;
+    transition: ease-out 0.5s;
+    border: 2px solid #47c7f6;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 0 #47c7f6;
+  }
+  
+  button:hover {
+    color: white;
+    box-shadow: inset 0 -100px 0 0 #47c7f6;
+  }
+  
+  button:active {
+    transform: scale(0.9);
+  }
+
+@media screen and (max-width: 950px ) {
+    .local-and-bio {
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+}

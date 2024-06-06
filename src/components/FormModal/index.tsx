@@ -1,6 +1,6 @@
 import './modal.css'
 import { useForm } from "react-hook-form"
-import { useState, useEffect } from "react"
+import { useEffect, useContext } from "react"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import  Img  from "../../assets/minhafoto.jpg"
@@ -8,17 +8,7 @@ import  Img  from "../../assets/minhafoto.jpg"
 import api from '../../api'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-
-
-interface UserDatas {
-    id: string,
-    name: string,
-    age: string,
-    street: string,
-    neighborhood: string,
-    state: string,
-    bio: string,
-}
+import { MyContext } from '../../MyContext'
 
 const dataSchema = z.object({
     name: z.string(),
@@ -36,41 +26,21 @@ const dataSchema = z.object({
     const { register, handleSubmit, setValue } = useForm<DataSchema>({
         resolver: zodResolver(dataSchema)
       })
-      const [editDatas, setEditDatas] = useState<UserDatas | null>(null)
+      const { contextDatas } = useContext(MyContext)
 
       useEffect(() => {
-        let isMounted = true;
-    
-        async function getDatas() {
-            await api.get("/user")
-            .then((e) => {
-                const userDataFromResponse: UserDatas = e.data.user[0];
-                if (isMounted) {
-                    setEditDatas(userDataFromResponse);
-                }
-            })
-        }
-    
-        getDatas();
-    
-        if (editDatas && isMounted) {
-            setValue("name", editDatas.name ?? "");
-            setValue("age", editDatas.age ?? "");
-            setValue("street", editDatas.street ?? "");
-            setValue("neighborhood", editDatas.neighborhood ?? "");
-            setValue("state", editDatas.state ?? "");
-            setValue("bio", editDatas.bio ?? "");
-            isMounted = false;
-        }
-  
-        return () => {
-            isMounted = false;
-        };
-    }, [editDatas, setValue]);
+            setValue("name", contextDatas?.name ?? "");
+            setValue("age", contextDatas?.age ?? "");
+            setValue("street", contextDatas?.street ?? "");
+            setValue("neighborhood", contextDatas?.neighborhood ?? "");
+            setValue("state", contextDatas?.state ?? "");
+            setValue("bio", contextDatas?.bio ?? "");
+            console.log("rodando 2")
+    }, [contextDatas ,setValue]);
     
       async function handleSubmitZod(data: DataSchema) {
         const dataSaved = {
-            id: editDatas?.id,
+            id: contextDatas?.id,
             ...data,
         };
         
@@ -84,7 +54,6 @@ const dataSchema = z.object({
             "neighborhood": dataSaved.neighborhood,
             "bio": dataSaved.bio
         } 
-
         )
         .then(()=>{
             toast.success('Usuário atualizado com sucesso!')
@@ -93,11 +62,10 @@ const dataSchema = z.object({
             toast.error('Erro ao atualizar usuário')
         });
     }
-    
       return (
         <>
           <form className='modal-container' onSubmit={handleSubmit(handleSubmitZod)}>            
-            <img src={Img} alt="m de perfil" style={{ width: '100px', height: '100px' }} />
+            <img src={Img} alt="foto de perfil" style={{ width: '100px', height: '100px' }} />
             <label htmlFor='name'>Nome</label>
             <input type="text" id='name' {...register('name')} />
             <label htmlFor='age'>Idade</label>
@@ -111,7 +79,7 @@ const dataSchema = z.object({
             <label htmlFor='bio'>Biografia</label>
             <textarea id='bio' {...register('bio')} />
             <button type="submit">Atualizar</button> 
-            </form>
-          </> 
+          </form>
+        </> 
       )
 }

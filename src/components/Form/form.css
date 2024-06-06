@@ -111,6 +111,14 @@ button {
     transform: scale(0.9);
   }
 
+  .spinner {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
 @media screen and (max-width: 950px ) {
     .local-and-bio {
         flex-wrap: wrap;
